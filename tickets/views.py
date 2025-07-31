@@ -15,6 +15,8 @@ def reserve_ticket(request, event_id):
             ticket.user = request.user
             ticket.event = event
             ticket.save()
+            ticket.generate_qr_code()
+            ticket.save()
             return redirect('simulate_payment', ticket_id=ticket.id)
     else:
         form = TicketForm()

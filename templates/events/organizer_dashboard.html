@@ -1,7 +1,35 @@
-{% if user.is_authenticated %}
-  {% if user.is_organizer %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'organizer_dashboard' %}">📊 Mon Dashboard</a>
-    </li>
-  {% endif %}
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Tableau de bord organisateur</h2>
+
+{% if dashboard_data %}
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for data in dashboard_data %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          {% if data.event.image %}
+            <img src="{{ data.event.image.url }}" class="card-img-top" style="max-height: 180px; object-fit: cover;" alt="Image de l'événement">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ data.event.title }}</h5>
+            <p class="card-text">
+              <strong>Date :</strong> {{ data.event.date|date:"d/m/Y H:i" }}<br>
+              <strong>Lieu :</strong> {{ data.event.location }}<br>
+              <strong>Billets vendus :</strong> {{ data.total_sold }}<br>
+              <strong>Revenus :</strong> {{ data.total_revenue }} FCFA
+            </p>
+            <a href="{% url 'event_detail' data.event.id %}" class="btn btn-primary w-100">Voir l'événement</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="alert alert-info">
+    Aucun événement encore créé. <a href="{% url 'create_event' %}">Créer un événement maintenant</a>.
+  </div>
 {% endif %}
+
+<a href="{% url 'create_event' %}" class="btn btn-success mt-4">➕ Créer un nouvel événement</a>
+{% endblock %}

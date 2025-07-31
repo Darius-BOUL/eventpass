@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if user.is_authenticated and user == ticket.user %}
+
+    <h2>Détails du billet</h2>
+
+    {% if ticket.qr_code %}
+      <div class="mb-3">
+        <h4>QR Code du billet</h4>
+        <img src="{{ ticket.qr_code.url }}" alt="QR Code" class="img-fluid" style="max-width: 250px;">
+      </div>
+    {% endif %}
+
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Événement :</strong> {{ ticket.event.title }}</li>
+      <li class="list-group-item"><strong>Date de l'événement :</strong> {{ ticket.event.date|date:"d/m/Y H:i" }}</li>
+      <li class="list-group-item"><strong>Quantité :</strong> {{ ticket.quantity }}</li>
+      <li class="list-group-item"><strong>Prix total :</strong> {{ ticket.total_price }} FCFA</li>
+      <li class="list-group-item"><strong>Date d'achat :</strong> {{ ticket.purchased_at|date:"d/m/Y H:i" }}</li>
+    </ul>
+
+  {% else %}
+    <div class="alert alert-danger mt-4">
+      <h3>Billet non trouvé ou accès non autorisé</h3>
+    </div>
+  {% endif %}
+{% endblock %}
