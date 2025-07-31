@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+  <h2 class="text-success">✅ Paiement réussi !</h2>
+  <p>Votre réservation a bien été confirmée. Vous recevrez vos billets par email.</p>
+
+  <a href="{% url 'event_list' %}" class="btn btn-outline-primary mt-3">Retour à la liste des événements</a>
+</div>
+{% endblock %}

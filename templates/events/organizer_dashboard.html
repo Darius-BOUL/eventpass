@@ -1,0 +1,7 @@
+{% if user.is_authenticated %}
+  {% if user.is_organizer %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'organizer_dashboard' %}">📊 Mon Dashboard</a>
+    </li>
+  {% endif %}
+{% endif %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Paiement du billet</h2>
+
+<p><strong>Événement :</strong> {{ ticket.event.title }}</p>
+<p><strong>Nombre de billets :</strong> {{ ticket.quantity }}</p>
+<p><strong>Total à payer :</strong> {{ ticket.total_price }} FCFA</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary">Simuler le paiement</button>
+</form>
+
+<a href="{% url 'event_detail' ticket.event.id %}" class="btn btn-secondary mt-3">⬅ Retour à l’événement</a>
+{% endblock %}

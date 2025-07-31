@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if event.image %}
+  <img src="{{ event.image.url }}" class="img-fluid mb-3" style="max-height: 400px; object-fit: cover;">
+{% endif %}
+<h2>{{ event.title }}</h2>
+
+<div class="mb-3">
+  <p><strong>Description :</strong> {{ event.description }}</p>
+  <p><strong>Lieu :</strong> {{ event.location }}</p>
+  <p><strong>Date :</strong> {{ event.date|date:"d/m/Y H:i" }}</p>
+  <p><strong>Prix :</strong> {{ event.ticket_price }} FCFA</p>
+  <p><strong>Billets disponibles :</strong> {{ event.total_tickets }}</p>
+</div>
+
+{% if user.is_authenticated %}
+  <a href="{% url 'reserve_ticket' event.id %}" class="btn btn-success">Réserver un billet</a>
+{% else %}
+  <p><a href="{% url 'login' %}">Connectez-vous</a> pour réserver un billet.</p>
+{% endif %}
+
+<a href="{% url 'event_list' %}" class="btn btn-secondary mt-3">⬅ Retour à la liste</a>
+{% endblock %}

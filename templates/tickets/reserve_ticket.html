@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Réserver un billet pour : {{ event.title }}</h2>
+
+<p><strong>Date :</strong> {{ event.date|date:"d/m/Y H:i" }}</p>
+<p><strong>Lieu :</strong> {{ event.location }}</p>
+<p><strong>Prix par billet :</strong> {{ event.ticket_price }} FCFA</p>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-success">Réserver</button>
+</form>
+
+<a href="{% url 'event_detail' event.id %}" class="btn btn-secondary mt-3">⬅ Retour</a>
+{% endblock %}
