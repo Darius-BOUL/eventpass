@@ -3,6 +3,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+
 
 def register_view(request):
     if request.method == 'POST':
@@ -15,21 +17,21 @@ def register_view(request):
         form = RegistrationForm()
     return render(request, 'accounts/register.html', {'form': form})
 
+
 def login_view(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = LoginForm(request=request, data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
-            if user:
-                login(request, user)
-                return redirect('event_list')
-            else:
-                messages.error(request, 'Nom d’utilisateur ou mot de passe incorrect.')
+            user = form.get_user()  # Récupère automatiquement l'utilisateur validé
+            login(request, user)
+            next_url = request.GET.get('next') or 'event_list'
+            return redirect(next_url)
+        else:
+            messages.error(request, 'Nom d’utilisateur ou mot de passe incorrect.')
     else:
         form = LoginForm()
     return render(request, 'accounts/login.html', {'form': form})
+
 
 @login_required
 def logout_view(request):

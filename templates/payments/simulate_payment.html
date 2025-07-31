@@ -1,16 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Paiement du billet</h2>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">💳 Paiement du billet</h2>
 
-<p><strong>Événement :</strong> {{ ticket.event.title }}</p>
-<p><strong>Nombre de billets :</strong> {{ ticket.quantity }}</p>
-<p><strong>Total à payer :</strong> {{ ticket.total_price }} FCFA</p>
+        <ul class="list-group list-group-flush mb-3">
+          <li class="list-group-item"><strong>Événement :</strong> {{ ticket.event.title }}</li>
+          <li class="list-group-item"><strong>Nombre de billets :</strong> {{ ticket.quantity }}</li>
+          <li class="list-group-item"><strong>Total à payer :</strong> {{ ticket.total_price }} FCFA</li>
+        </ul>
 
-<form method="post">
-  {% csrf_token %}
-  <button type="submit" class="btn btn-primary">Simuler le paiement</button>
-</form>
+        <form method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary w-100">Simuler le paiement</button>
+        </form>
 
-<a href="{% url 'event_detail' ticket.event.id %}" class="btn btn-secondary mt-3">⬅ Retour à l’événement</a>
+        <a href="{% url 'event_detail' ticket.event.id %}" class="btn btn-secondary w-100 mt-3">⬅ Retour à l’événement</a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

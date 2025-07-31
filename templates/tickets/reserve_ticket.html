@@ -1,17 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Réserver un billet pour : {{ event.title }}</h2>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">🎟 Réserver un billet</h2>
 
-<p><strong>Date :</strong> {{ event.date|date:"d/m/Y H:i" }}</p>
-<p><strong>Lieu :</strong> {{ event.location }}</p>
-<p><strong>Prix par billet :</strong> {{ event.ticket_price }} FCFA</p>
+        <h5 class="text-center text-primary mb-3">{{ event.title }}</h5>
 
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="btn btn-success">Réserver</button>
-</form>
+        <ul class="list-group list-group-flush mb-3">
+          <li class="list-group-item"><strong>Date :</strong> {{ event.date|date:"d/m/Y H:i" }}</li>
+          <li class="list-group-item"><strong>Lieu :</strong> {{ event.location }}</li>
+          <li class="list-group-item"><strong>Prix par billet :</strong> {{ event.ticket_price }} FCFA</li>
+        </ul>
 
-<a href="{% url 'event_detail' event.id %}" class="btn btn-secondary mt-3">⬅ Retour</a>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-success w-100">✅ Confirmer la réservation</button>
+        </form>
+
+        <a href="{% url 'event_detail' event.id %}" class="btn btn-secondary w-100 mt-3">⬅ Retour à l'événement</a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
