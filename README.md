@@ -20,7 +20,12 @@ Elle permet aux utilisateurs de découvrir des événements, de réserver des pl
 - **Frontend** : HTML5, CSS3, JavaScript, Bootstrap 5
 - **Outils** : Environnement virtuel Python (`.venv`)
 
-## Installation locale
+## Auteur
+Darius BOULANGA
+
+LinkedIn : Darius BOULANGA
+
+GitHub : @Darius-BOUL
 
 Pour faire tourner ce projet sur votre machine, suivez ces étapes :
 
