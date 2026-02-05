@@ -1,16 +1,37 @@
 # EventPass
 
-**EventPass** est une application Django complète de gestion d'événements et de billetterie.
-Elle permet aux utilisateurs de découvrir des événements, de réserver des places et de générer automatiquement des billets sécurisés avec QR codes après un paiement simulé.
+EventPass — Plateforme de promotion d’événements avec billetterie numérique
+
+EventPass est une application web développée avec Django permettant de publier des événements, gérer les réservations de billets et générer automatiquement un QR code après paiement.
+Le projet est conçu comme une base solide pour une solution de billetterie numérique simple et extensible.
 
 ## Fonctionnalités
 
-- **Authentification complète** : Inscription et connexion pour les utilisateurs et les organisateurs.
-- **Gestion des Événements** : Création, modification et affichage des événements avec détails (prix, date, lieu).
-- **Système de Réservation** : Sélection de la quantité et calcul automatique du prix total.
-- **Paiement Simulé** : Flux complet allant de la réservation à la confirmation de paiement.
-- **Billetterie Automatisée** : Génération d'un QR code unique pour chaque ticket acheté (via la bibliothèque `qrcode`).
-- **Interface Moderne** : Design responsive avec Bootstrap 5 et arrière-plan animé en Canvas JS.
+👤 Inscription & connexion des utilisateurs
+🧑‍💼 Rôle Organisateur avec permissions spécifiques
+📅 Création et gestion d’événements
+📋 Liste et détail des événements
+🎟️ Réservation de billets
+💳 Simulation de paiement
+🔐 Accès restreint au tableau de bord organisateur
+📊 Tableau de bord avec :
+   -nombre de billets vendus
+   -revenus générés
+🔳 Génération automatique d’un QR code par billet payé
+🖼️ Upload d’image d’événement
+🎨 Interface Bootstrap + fond animé canvas
+
+
+Rôles utilisateurs
+   - Utilisateur simple
+   - Voir les événements
+   - Réserver des billets
+   - Payer (simulation)
+   - Organisateur
+   - Créer des événements
+   - Accéder au tableau de bord
+   - Voir ventes & revenus
+Le rôle organisateur est géré via le champ is_organizer du modèle User.
 
 ## Technologies utilisées
 
@@ -47,6 +68,11 @@ Voici les prochaines étapes de développement prévues pour transformer ce proj
 - [ ] **Paiement Stripe :** Intégration de l'API Stripe pour gérer la vente de billets payants.
 - [ ] **Gestion des remises :** Système de codes promos pour les organisateurs.
 
+- [ ] PDF billet téléchargeable
+- [ ] Paiement réel
+- [ ] Recherche & filtres événements
+- [ ] Statistiques avancées
+
 ---
 
 
@@ -64,3 +90,23 @@ Pour faire tourner ce projet sur votre machine, suivez ces étapes :
    ```bash
    git clone [https://github.com/Darius-BOUL/eventpass.git](https://github.com/Darius-BOUL/eventpass.git)
    cd eventpass
+
+2. **Créer un environnement virtuel**
+   python -m venv venv
+   source venv/bin/activate      # Linux/macOS
+   venv\Scripts\activate         # Windows
+
+3. **Installer les dépendances**
+   pip install django qrcode pillow
+
+4. **Migrations**
+   python manage.py makemigrations
+   python manage.py migrate
+   
+5. **Créer un superuser**
+   python manage.py createsuperuser
+
+6. **Lancer le serveur**
+   python manage.py runserver
+   Puis ouvrir :
+   http://127.0.0.1:8000/
